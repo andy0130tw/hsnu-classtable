@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html data-ng-app="hsnusch">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>師大附中課表查詢系統</title>
+
+	<meta name="product" content="師大附中課表查詢系統"/>
+	<meta name="author" content="師大附中1296">
+	<meta name="description" content="簡易課表查詢系統，更簡潔、更方便，隨時隨地輕鬆查課表！">
+
+	<meta property="og:title" content="師大附中課表查詢系統"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="http://hsnu.qov.tw/schedule/"/>
+  <meta property="og:image" content="http://hsnu.qov.tw/res/images/logo_ct.jpg"/>
+  <meta property="og:site_name" content="師大附中課表查詢系統"/>
+  <meta property="og:description" content="師大附中簡易課表查詢系統，更簡潔、更方便，隨時隨地輕鬆查課表！"/>
+  <meta property="fb:app_id" content="752537458152845"/>
+  <meta property="fb:admins" content="1795479671"/>
+
+	<!-- build:css css/app.css -->
+	<link rel="stylesheet" href="css/material/icons.css"/>
+	<link rel="stylesheet" href="css/uikit/uikit.gradient.min.css"/>
+	<link rel="stylesheet" href="css/uikit/sticky.gradient.min.css"/>
+	<link rel="stylesheet" href="css/uikit/flex.gradient.min.css"/>
+	<!-- <-link rel="stylesheet" href="!css/uikit/autocomplete.gradient.min.css"/> -->
+	<link rel="stylesheet" href="css/uikit/accordion.gradient.min.css"/>
+	<link rel="stylesheet" href="css/uikit/form-select.gradient.min.css"/>
+	<link rel="stylesheet" href="css/sch/sch.style.css"/>
+	<link rel="stylesheet" href="css/sch/uikit.patch.css"/>
+	<link rel="stylesheet" href="css/sch/uikit.angular.css"/>
+	<link rel="stylesheet" href="css/sch/facebook.css"/>
+	<!-- endbuild -->
+	<!-- inject:css -->
+  <!-- endinject -->
+	
+  <!--[if lte IE 8]>
+     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+     <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.0/es5-shim.min.js"></script>
+     <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.0/es5-sham.min.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+	<div id="fb-root"></div>
+	<nav class="md-appbar uk-navbar uk-navbar-attached" data-uk-sticky>
+	    <ul class="uk-navbar-nav uk-navbar-flip">
+	    	<!-- <li class="md-action-icon"><a href=""><i class="mdi mdi-action-search"></i></a></li>
+	    	<li class="md-action-icon"><a href=""><i class="mdi mdi-action-favorite"></i></a></li>
+	    	<li><a href=""><i class="mdi mdi-action-favorite-outline"></i></a></li>
+	    	<li class="md-menu-icon"><a href=""><i class="mdi mdi-narrow mdi-navigation-more-vert"></i></a></li> -->
+	    </ul>
+	    <div class="uk-navbar-brand uk-text-truncate" style="float: none;"><!--
+	 --><i class="mdi mdi-custom-brand mdi-notification-event-note">
+	 	</i>HSNU&nbsp;課表查詢
+	    </div>
+	    <!-- <ul class="uk-navbar-nav">
+	        <li><a href="">WWW You discovered me WWW</a></li>
+	    </ul> -->
+	</nav>
+
+	<div class="uk-container uk-container-center uk-margin-top">
+		<!--[if lte IE 8]>
+		<aside class="uk-hidden" data-ng-if="isLegacyIE">
+			<h1 class="uk-heading-large">Oops!</h1>
+			<h2>課表查詢系統不支援 Internet Explorer 8.0 以下版本，建議使用其他瀏覽器。</h2>
+			<div data-ng-include="'template/footer.html'"></div>
+		</aside>
+		<![endif]-->
+		<div class="uk-grid uk-grid-small">
+			<div id="schTableSidebar" class="uk-flex uk-flex-column uk-width-medium-2-5 uk-push-medium-3-5">
+				<header class="uk-container-center uk-margin-top uk-hidden-touch uk-hidden-notouch">
+					<h1>國立臺灣師大附中課表查詢系統 <small class="uk-text-muted">{{ versionText }}</small></h1>
+				</header>
+				<section id="schTableSidebarUpper">
+					<div class="uk-form uk-form-horizontal">
+						<div class="uk-form-row">
+							<sch-class-selector data-uk-dropdown class="uk-button-dropdown uk-width-1-1">
+							</sch-class-selector>
+						</div>
+					</div>
+					<!--another control here-->
+				</section>
+				<section id="schTableSidebarLower" data-ng-include="'template/classSidebarLower.html'">
+				</section>
+				<footer id="schTableSidebarBottom" class="uk-hidden-small" data-ng-include="'template/footer.html'">
+				</footer>
+			</div>
+			
+			<article id="schTableContainer" class="uk-width-medium-3-5 uk-pull-medium-2-5">
+				<sch-table></sch-table>
+			</article>
+			
+			<footer id="schFooterMobile" class="uk-visible-small uk-width-1-1" data-ng-include="'template/footer.html'">
+			</footer>
+		</div>
+	</div>
+
+	<div data-ng-include="'template/modals.html'"></div>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+	<script src="https://cdn.rawgit.com/jgallen23/jquery-builder/0.7.0/dist/1.11.1/jquery-ajax-deprecated.min.js"></script>
+	<!-- build:js js/app.js -->
+	<script src="js/sch/sch.js"></script>
+	<script src="js/sch/sch.services.js"></script>
+	<!--<script src="!js/jquery.min.js"></script>-->
+	<script src="js/uikit/uikit.min.js"></script>
+	<!--<script src="!js/uikit/autocomplete.min.js"></script>-->
+	<script src="js/uikit/form-select.min.js"></script>
+	<script src="js/uikit/sticky.min.js"></script>
+	<!-- endbuild -->
+	<!-- inject:js -->
+  <!-- endinject -->
+
+  <script>
+		(function(e,t,n){var o,c=e.getElementsByTagName(t)[0];e.getElementById(n)||(o=e.createElement(t),o.id=n,o.src="//connect.facebook.net/zh_TW/sdk.js#xfbml=1&appId=752537458152845&version=v2.0",c.parentNode.insertBefore(o,c))})(document,"script","facebook-jssdk");
+		window.twttr=function(t,e,r){var n,i=t.getElementsByTagName(e)[0],w=window.twttr||{};if(!t.getElementById(r))return n=t.createElement(e),n.id=r,n.src="https://platform.twitter.com/widgets.js",i.parentNode.insertBefore(n,i),w._e=[],w.ready=function(t){w._e.push(t)},w}(document,"script","twitter-wjs");
+		(function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://apis.google.com/js/plusone.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+  </script>
+
+</body>
+</html>

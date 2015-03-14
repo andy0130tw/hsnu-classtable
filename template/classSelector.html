@@ -1,0 +1,52 @@
+<button class="uk-button uk-button-large uk-width-1-1 uk-text-left uk-text-truncate"
+  data-ng-disabled="state == 'initial'">
+  <i class="mdi mdi-hardware-keyboard-arrow-down sch-button-caret"></i>
+  <span class="sch-button-hint uk-hidden-small">選擇班級：</span>
+  <span class="uk-text-bold uk-visible-small">班級：</span>
+  <span class="sch-button-label" data-ng-switch on="state">
+    <span data-ng-switch-when="initial">載入中...</span>
+    <span class="uk-text-danger" data-ng-switch-when="error"><i class="mdi mdi-action-highlight-remove"></i>  載入失敗！</span>
+    <span data-ng-switch-when="success">
+      <span data-ng-class="{'uk-text-muted': !selectedItem }" data-ng-bind=" selectedItem.label || '[ 未選擇 ]' "></span>
+    </span>
+  </span>
+</button>
+
+<div class="uk-dropdown uk-dropdown-width-2 sch-dropdown-full-width">
+
+<ul class="uk-hidden-small uk-subnav uk-subnav-pill sch-subnav-justified">
+  <li ng-repeat="category in categoryList" ng-class="{'uk-active': selectedCategoryTab == category}">
+    <a href ng-click="selectCategory($event,category)"><i class="mdi mdi-action-list"></i> {{ category.label }}</a>
+  </li>
+</ul>
+<div class="uk-hidden-small uk-grid uk-dropdown-grid"><!-- uk-dropdown-scrollable -->
+  <div class="uk-width-1-3" ng-repeat="div in [0,1,2]">
+    <ul class="uk-nav uk-nav-dropdown uk-panel">
+      <li ng-repeat="class in classList | filter:division(div) | filter:categoryFilter" ng-class="{'uk-active': selectedItem == class}">
+        <a href ng-click="selectClassByList($event,class)" ng-bind="class.label" class="uk-text-truncate"></a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="uk-visible-small">
+  <sch-class-selector-dropdown class="uk-form-select uk-width-1-3 uk-text-center" data-ng-class="{'sch-select-active': selectedCategoryOption == cat }" ng-repeat="cat in categoryList">
+      <a class="sch-dropdown-link"><i class="mdi mdi-action-list"></i> <span>dummy</span> <i class="mdi mdi-hardware-keyboard-arrow-down"></i></a>
+      <select class="uk-width-1-1" data-ng-model="_selectOption" data-ng-change="selectClassByOption(cat)">
+        <option value="" class="uk-hidden" selected>{{ cat.label }}</option>
+        <option ng-repeat="class in classList | filter:{category: cat.label}" value="{{ $index }}">{{ class.label }}</option>
+        <!-- <option ng-attr-selectxed="{{ selectedItem  }}" value="{{ class.id }}">{{ class.label }}</option>
+        <option ng-repeat="class in classList | filter:category" ng-attr-selectxed="{{ selectedItem  }}" value="{{ class.id }}">{{ class.label }}</option> -->
+      </select>
+    </div>
+  </div>
+  <!-- <div class="uk-form-controls">
+    <select class="uk-width-1-1" ng-repeat="cat in categoryList" ng-model="selectedItem" ng-options="class as class.label for class in classList | filter:categoryFilter">
+      <option value="{{ cat.label }}" selected>{{ cat.label }}</option>
+      <option ng-attr-selectxed="{{ selectedItem  }}" value="{{ class.id }}">{{ class.label }}</option>
+      <option ng-repeat="class in classList | filter:category" ng-attr-selectxed="{{ selectedItem  }}" value="{{ class.id }}">{{ class.label }}</option>
+    </select>
+  </div> -->
+
+</div>
+

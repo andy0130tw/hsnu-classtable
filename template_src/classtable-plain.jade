@@ -1,0 +1,35 @@
+-var amNum=["一","二","三","四"];
+-var amSch=["0810 - 0900","0910 - 1000","1010 - 1100","1110 - 1200"];
+-var pmNum=["五","六","七","八","九"];
+-var pmSch=["1300 - 1350","1400 - 1450","1510 - 1600","1610 - 1700","1710 - 1800"];
+-var weekNum=amNum.concat("五");
+-var cnt=0;
+-function range(n){return new Array(n)}
+table.uk-table
+thead
+  tr
+    th.uk-width-1-10&attributes({colspan:3})
+    -for(var x = 0; x < 5; x++)
+      th.uk-width-1-10=weekNum[x]
+      
+tfoot
+tbody
+  -it1=amNum
+  -it2=amSch
+  
+  -function genTable(term,it1,it2){
+    each x,i in it1
+      tr
+        if i==0
+          th.ampm&attributes({rowspan:it1.length}) #{term}
+        td 第#{x}節
+        td #{it2[i]}
+        for _,p in range(5)
+          td(class="cell_"+(p+1)+"_"+(cnt+1))
+        -cnt++
+  -}
+
+  -genTable("上午",amNum,amSch)
+  tr
+    td(colspan=8)
+  -genTable("下午",pmNum,pmSch)

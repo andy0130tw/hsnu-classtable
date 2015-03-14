@@ -1,0 +1,239 @@
+/**
+ * Sch style css
+ */
+
+/***** Overall *****/
+html, body {
+	background-image: url(../../image/bg_brightsquares.png);
+}
+
+.mdi {
+	display: inline-block;
+	text-decoration: none !important;
+}
+
+#schTableContainer > * {
+	display: block;
+	/* maintain a good visual experience
+	 * Change in small screen (stacked)
+	 */
+	min-height: 24em;
+	background: rgba(255, 255, 255, .55);
+	border-radius: 4px;
+	padding: 20px;
+	margin-bottom: 32px;
+}
+
+@media screen and (max-width: 479px) {
+	#schTableContainer > * {
+		min-height: 10em;
+	}
+}
+
+#schTableContainer > * .bleed {
+	margin-left: -20px;
+	margin-right: -20px;
+}
+
+
+/* use uk-flex*
+#schTableSidebar {
+	display: flex;
+	flex-flow: column;
+}*/
+
+#schTableSidebarLower {
+	/* fill all available space */
+	flex: auto;
+}
+
+#schTableSidebarLower > * {
+	margin-top: 1.2em;
+}
+
+/***** HTML <option> appearance *****/
+option {
+	font-size: 14px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+/* sidebar margin bottom */
+#schTableSidebar {
+	margin-bottom: 1.8em;
+}
+#schTableSidebarUpper {
+	margin-bottom: 1.2em;
+}
+
+/***** Sidebar Typography *****/
+.sch-text-secondary th,
+.sch-text-secondary td {
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+.sch-text-secondary td {
+	color: #555;
+}
+
+.sch-text-secondary table {
+	background-color: rgba(255,255,255,.4);
+	border-radius: 4px;
+}
+
+/***** Typography *****/
+#schFooter {
+	color: #666;
+}
+
+/* schClassSelector dropdown */
+.sch-subnav-justified > li {
+	display: table-cell;
+	width: 1%;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+.sch-subnav-justified > li > a {
+	width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+	text-align: center;
+}
+
+.sch-button-caret {
+	float: right;
+	width: 16px;
+	/* to correctly place the caret
+	   and lest the text overlap it */
+	margin-right: -8px;
+}
+
+.uk-button-large > .sch-button-caret {
+	line-height: 38px;
+}
+
+.sch-button-hint {
+	float: left;
+	font-weight: 500;
+}
+
+.sch-button-label {
+	width: 100%;
+	margin-right: 40px;
+}
+
+.sch-select-active {
+	box-shadow: 1px 1px 6px rgb(142, 199, 59);
+	border: 1px solid rgb(142, 199, 59);
+	background-color: rgb(250, 255, 242);
+	border-radius: 4px;
+}
+
+.sch-dropdown-link {
+	line-height: 28px;
+}
+
+/***** Full Width Dropdown *****/
+.uk-dropdown.sch-dropdown-full-width {
+	width: 100%;
+}
+
+/***** Main Classtable *****/
+.sch-classtable {
+	table-layout: fixed;
+}
+
+.sch-classtable .cCell {
+	padding: 8px 2px;
+	cursor: default;
+	transition: all ease-out 200ms;
+	transition-property: background-color, box-shadow;
+}
+
+.sch-classtable .cCell:hover {
+	background: white;
+	box-shadow: 1px 1px 6px gray;
+}
+
+.sch-classtable .cWeek {
+	font-weight: 500;
+	text-align: center;
+	font-size: 1.4rem;
+	line-height: 1.4rem;
+}
+
+.sch-classtable .cCnt {
+	font-size: 90%;
+	font-weight: 300;
+}
+
+.sch-classtable .cCnt.cShort {
+	font-size: 125%;
+}
+
+.sch-classtable th.cAmpm {
+	min-width: 2em;
+	width: 1px;
+}
+.sch-classtable th.cTime {
+	/* an imperfect approach */
+	min-width: 4em;
+	width: 1px;
+}
+
+.sch-classtable .cTime {
+	overflow: hidden;
+}
+
+.sch-classtable .cAmpm {
+	white-space: pre;
+}
+
+.sch-classtable td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.sch-classtable .ccSubject {
+	font-size: 1.4rem;
+	line-height: 1.5rem;
+	letter-spacing: 2px;
+}
+
+.sch-classtable .ccSubject.ccSmall-1 {
+	font-size: 1.15rem;
+	letter-spacing: 1px;
+}
+
+.sch-classtable .ccSubject.ccSmall-2 {
+	font-size: 1.1rem;
+	letter-spacing: 0;
+}
+
+.sch-classtable .ccSubject.ccSmall-3 {
+	font-size: 1.05rem;
+	letter-spacing: -1px;
+}
+
+.sch-classtable .ccTeacher {
+	font-size: .9rem;
+	margin-top: .2rem;
+}
+
+.sch-classtable .ccWithTooltipHint {
+	border-bottom: 1px dashed gray;
+}
+
+.ccTooltip {
+	color: white;
+}
+
+/***** Table responsive *****/
+@media screen and (max-width: 479px) {
+	.uk-grid.uk-grid-small {
+		/* make it even more compact */
+		margin-left: -25px;
+		margin-right: -15px;
+	}
+}

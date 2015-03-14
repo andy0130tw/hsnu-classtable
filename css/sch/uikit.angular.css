@@ -1,0 +1,9 @@
+/***** validate state *****/
+input.ng-touched.ng-invalid,
+textarea.ng-touched.ng-invalid,
+select.ng-touched.ng-invalid {
+	/* from UIkit .uk-form-danger */
+	border-color: rgb(220, 141, 153) !important;
+	background: none repeat scroll 0% 0% rgb(255, 247, 248) !important;
+	color: rgb(216, 80, 48) !important;
+}

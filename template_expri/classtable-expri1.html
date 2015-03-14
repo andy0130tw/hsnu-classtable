@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<table class="uk-table"></table>
+<thead>
+  <tr>
+    <th class="uk-width-1-10" colspan="3"></th>
+    <th class="uk-width-1-10" data-ng-repeat="col in gArr(5) track by $index">{{ $index | tableRes:"weekDay" }}</th>
+  </tr>
+</thead>
+<tfoot></tfoot>
+<tbody>
+  <tr data-ng-repeat="row in gArr(5) track by $index">
+    <th class="ampm" rowspan="{{ 5 }}" data-ng-if="$index == 0">{{ "am" | tableRes:"ampm" }}</th>
+    <td class="class" data-ng-repeat="cell in gArr(5) track by $index">{{ cell }}</td>
+  </tr>
+  <tr>
+    <td colspan="8"></td>
+  </tr>
+  <tr data-ng-repeat="row in gArr(5) track by $index">
+    <th class="ampm" rowspan="{{ 5 }}" data-ng-if="$index == 0">{{ "pm" | tableRes:"ampm" }}</th>
+    <td class="class" data-ng-repeat="cell in gArr(5) track by $index">{{ cell }}</td>
+  </tr>
+</tbody>

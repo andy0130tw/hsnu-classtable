@@ -1,0 +1,170 @@
+/**
+ * UIkit assist css
+ */
+
+/***** Material Navbar *****/
+.uk-navbar.uk-navbar-attached {
+	transition: all 400ms ease-out;
+	transition-property: box-shadow;
+	box-shadow: 0 1px 2px transparent, 0 1px 4px transparent;
+}
+
+.uk-navbar.uk-navbar-attached {
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.24), 0 1px 4px rgba(0, 0, 0, 0.12);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.24), 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.uk-navbar-brand {
+	padding-left: 0;
+	padding-right: 0;
+	cursor: default;
+	font-size: 20px;
+}
+
+.uk-navbar-brand,
+.uk-navbar-nav > li > a {
+	margin-top: 0;
+	height: 56px;
+	line-height: 56px;
+}
+
+.uk-navbar-nav > li > a {
+	padding-left: 16px;
+	padding-right: 16px;
+	font-weight: 500;
+	border: 0;
+}
+
+.mdi-custom-brand,
+.uk-navbar-nav > li > a > .mdi {	
+	font-size: 24px;
+	width: 24px;
+	vertical-align: -4px;
+	text-align: center;
+	display: inline-block;
+}
+
+.uk-navbar-nav > li > a > .mdi.mdi-narrow {
+	width: 16px;
+	/* offset the element to correct nav layout */
+	margin-left: -8px;
+	padding-right: 0px;
+}
+
+.mdi-custom-brand {
+	padding: 0 16px;
+}
+
+.md-appbar {
+	border: 0;
+	height: 56px;
+	overflow: hidden;
+	/* overlay on the dropdown(1020 -> 1000), but below modal(1010) */
+	z-index: 1005 !important;
+}
+
+/***** Dropdown z-index Issue *****/
+.uk-dropdown {
+	z-index: 1000;
+}
+
+/***** Scrollable Dropdown Inner Shadow *****/
+.uk-dropdown-scrollable{
+	box-shadow: 0px 12px 9px -9px rgba(0, 0, 0, 0.2) inset,
+	            0px -12px 9px -9px rgba(0, 0, 0, 0.2) inset;
+}
+
+/***** <select> Firefox Appearence Issue *****/
+select {
+	min-width: 50px;
+}
+
+/***** Header Small *****/
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small {
+	font-size: 75%;
+}
+
+/***** Responsive Dropdown Items *****/
+.uk-nav-dropdown > li > a {
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+.uk-touch .uk-nav-dropdown > li > a {
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+
+/***** Dropdown Active *****/
+
+.uk-nav-dropdown > li.uk-active > a,
+.uk-nav-dropdown > li.uk-active > a:focus,
+.uk-nav-dropdown > li.uk-active > a:hover {
+    background: #009dd8;
+    color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2) inset;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
+}
+/* override the original :focus and :active */
+.uk-nav-dropdown > li > a:focus,
+.uk-nav-dropdown > li > a:hover {
+    background: rgba(0, 157, 216, 0.3);
+    color: inherit;
+    outline: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2) inset;
+    text-shadow: 0 -1px 3px rgba(0, 0, 0, .2)
+}
+
+/***** Modal close button -- use mdi instead *****/
+.uk-close:after {
+	/* remove the icon */
+	content: '';
+}
+
+/***** not quite opaque *****/
+.uk-panel-box {
+	background-color: rgba(255,255,255,.6);
+	box-shadow: 0 0 5px rgba(161,161,161,.4);
+}
+
+/***** Animation *****/
+.uk-button {
+	transition-property: background, border-color, color, text-shadow, box-shadow;
+	transition-duration: 400ms;
+}
+
+.uk-thumbnail {
+	transition-property: border-color, box-shadow;
+	transition-duration: 400ms;
+}
+
+/***** Responsive *****/
+@media screen and (max-width: 359px) {
+	/*.md-appbar{height: 48px; line-height: 48px;}
+	.uk-navbar-nav > li > a{height: 48px; line-height: 48px;}*/
+	/*.uk-navbar-brand{width: 100%;}*/
+	.md-appbar .md-action-icon{display: none;}
+}
+
+
+
+@media screen and (min-width: 360px) and (max-width: 799px) {
+
+}
+
+@media screen and (min-width: 800px) {
+
+}
+
+@media screen and (max-height: 479px) {
+	.md-appbar {height: 48px; line-height: 48px;}
+	.md-appbar .uk-navbar-brand,
+	.md-appbar .uk-navbar-nav > li > a {
+		height: 48px;
+		line-height: 48px;
+	}
+}

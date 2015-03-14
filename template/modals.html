@@ -1,0 +1,212 @@
+<div data-ng-controller="schModalReportCtrl" id="modalReport" class="uk-modal">
+	<form novalidate name="modalReportForm" class="uk-modal-dialog" data-ng-submit="sendForm(modalReportForm, formModel)">
+		<a class="uk-modal-close uk-close"><i class="mdi mdi-navigation-close"></i></a>
+		<div class="uk-modal-header">
+			錯誤回報
+		</div>
+		<div>
+			<p>若發現<u>畫面上的</u>課表資料有以下情形之一，煩請透過此表單回報，以便及時更正：</p>
+			<ol>
+				<li>課表資料錯誤。</li>
+				<li>班號誤植。</li>
+				<li>課名誤植，或有較合適之課名可替代。</li>
+			</ol>
+			<p>除此之外的訊息如功能建議、網頁載入失敗等無關資料正確性的問題，請透過「意見箱」回報。</p>
+		</div>
+		<div data-ng-if="classTableData" class="uk-form uk-form-horizontal">
+			<p><span class="uk-badge uk-badge-warning">*</span> 所有欄位皆為必填。</p>
+			<div class="uk-form-row">
+				<label class="uk-form-label">回報者姓名：</label>
+				<div class="uk-form-controls">
+					<input type="text" name="formName" required data-ng-model="formModel.name"/>
+				</div>
+			</div>
+			<div class="uk-form-row">
+				<label class="uk-form-label">班號(非學生請填身分)：</label>
+				<div class="uk-form-controls">
+					<input type="text" name="formClassCode" required data-ng-model="formModel.classCode"/>
+				</div>
+			</div>
+			<div class="uk-form-row">
+				<label class="uk-form-label">電子信箱(方便告知勘誤結果)：</label>
+				<div class="uk-form-controls">
+					<input type="email" name="formEmail" required data-ng-model="formModel.email"/>
+				</div>
+			</div>
+			<div class="uk-form-row">
+				<label class="uk-form-label">要回報的課表代碼：</label>
+				<div class="uk-form-controls">
+					<input type="text" required disabled data-ng-model="formModel.reportTarget"/>
+				</div>
+			</div>
+			<div class="uk-form-row">
+				<label class="uk-form-label">勘誤內容：</label>
+				<div class="uk-form-controls">
+					<textarea required rows="5" class="uk-width-1-1" data-ng-model="formModel.body"></textarea>
+				</div>
+			</div>
+		</div>
+		<div data-ng-if="classTableData" class="uk-modal-footer uk-flex uk-flex-space-between uk-flex-middle">
+			<div class="uk-text-left" data-ng-switch on="state">
+				<span data-ng-switch-when="loading">傳送中...</span>
+				<div data-ng-switch-when="success" class="uk-animation-slide-bottom uk-text-success">已送出，感謝回報！</div>
+				<div data-ng-switch-when="error" class="uk-animation-shake uk-text-danger">{{ errorReason || '傳送失敗，請稍後再試！' }}</div>
+			</div>
+			<div><button type="submit" class="uk-button uk-button-primary" data-ng-disabled="state == 'loading' || !modalReportForm.$valid">送出</button>
+			<button class="uk-button uk-modal-close">{{ modalReportForm.$dirty ? '取消' : '關閉' }}</button></div>
+		</div>
+		<div data-ng-if="!classTableData" class="uk-text-center uk-text-warning">
+			<p class="uk-h3">欲回報錯誤，需要先選擇班級。</p>
+		</div>
+	</form>
+</div>
+
+<div data-ng-controller="schModalCommentCtrl" id="modalComment" class="uk-modal">
+	<form novalidate name="modalCommentForm" class="uk-modal-dialog" data-ng-submit="sendForm(modalCommentForm, formModel)">
+		<a class="uk-modal-close uk-close"><i class="mdi mdi-navigation-close"></i></a>
+		<div class="uk-modal-header">
+			意見箱
+		</div>
+		<div class="uk-form uk-form-horizontal">
+			<p><span class="uk-badge uk-badge-warning">*</span> 所有欄位皆為必填。</p>
+			<div class="uk-form-row">
+				<label class="uk-form-label">姓名：</label>
+				<div class="uk-form-controls">
+					<input type="text" name="formName" required data-ng-model="formModel.name"/>
+				</div>
+			</div>
+			<div class="uk-form-row">
+				<label class="uk-form-label">身分(班號可不填)：</label>
+				<div class="uk-form-controls">
+					<select required data-ng-model="formModel.identity">
+						<option value="student">學生</option>
+						<option value="teacher">老師</option>
+						<option value="alumnus">校友</option>
+						<option value="other">其他</option>
+					</select>
+					<input type="text" name="formClassCode" placeholder="班號" data-ng-model="formModel.classCode"/>
+				</div>
+			</div>
+			<div class="uk-form-row">
+				<label class="uk-form-label">電子信箱：</label>
+				<div class="uk-form-controls">
+					<input type="email" name="formEmail" required data-ng-model="formModel.email"/>
+				</div>
+			</div>
+			<div class="uk-form-row">
+				<label class="uk-form-label">你對這個系統的評價(5為滿意)：</label>
+				<div class="uk-form-controls">
+					<select data-ng-model="formModel.vote" data-ng-options="i as i for i in [5,4,3,2,1]"></select>
+				</div>
+			</div>
+			<div class="uk-form-row">
+				<label class="uk-form-label">意見：</label>
+				<div class="uk-form-controls">
+					<textarea required rows="5" class="uk-width-1-1" data-ng-model="formModel.body"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="uk-modal-footer uk-flex uk-flex-space-between uk-flex-middle">
+			<div class="uk-text-left" data-ng-switch on="state">
+				<span data-ng-switch-when="loading">傳送中...</span>
+				<div data-ng-switch-when="success" class="uk-animation-slide-bottom uk-text-success">已送出，感謝您留下寶貴的意見！</div>
+				<div data-ng-switch-when="error" class="uk-animation-shake uk-text-danger">{{ errorReason || '傳送失敗，請稍後再試！' }}</div>
+			</div>
+			<div><button type="submit" class="uk-button uk-button-primary" data-ng-disabled="state == 'loading' || !modalCommentForm.$valid">送出</button>
+			<button class="uk-button uk-modal-close">{{ modalCommentForm.$dirty ? '取消' : '關閉' }}</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div id="modalShare" class="uk-modal">
+	<div class="uk-modal-dialog">
+		<a class="uk-modal-close uk-close"><i class="mdi mdi-navigation-close"></i></a>
+		<div class="uk-modal-header">
+			分享
+		</div>
+		<div class="fb-like uk-margin-bottom" data-href="http://hsnu.qov.tw/schedule/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-width="100%"></div>
+		<div class="uk-margin-bottom">
+			<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://hsnu.qov.tw/schedule/" data-text="快來試試師大附中課表查詢系統！" data-via="andy0130tw" data-count="vertical">Tweet</a>
+			<div class="g-plusone" data-size="tall" data-href="http://hsnu.qov.tw/schedule/"></div>
+		</div>
+		<div class="fb-comments" data-href="http://hsnu.qov.tw/" data-numposts="8" data-colorscheme="light" data-width="100%"></div>
+	</div>
+</div>
+
+<div id="modalManual" class="uk-modal">
+	<div class="uk-modal-dialog">
+		<a class="uk-modal-close uk-close"><i class="mdi mdi-navigation-close"></i></a>
+		<div class="uk-modal-header">
+			使用說明
+		</div>
+		<h2>查詢</h2>
+			<p>從右側的下拉選單中選擇想查詢的班級，稍待片刻即會載入。</p>
+		<h2>回報</h2>
+			<p>若發現畫面出現的資訊有誤，請點選頁尾的回報連結，填妥表單後送出。</p>
+	</div>
+</div>
+
+<div id="modalAbout" class="uk-modal">
+	<div class="uk-modal-dialog" data-sch-uk-tab data-target="'#modalAboutSwitcher'" data-animation="'fade'">
+		<a class="uk-modal-close uk-close"><i class="mdi mdi-navigation-close"></i></a>
+		<div class="uk-modal-header">
+			關於本系統
+		</div>
+		<ul class="uk-tab" data-uk-tab>
+			<li class="uk-active"><a href>課表查詢</a></li>
+		    <li><a href>作者</a></li>
+		    <li><a href>外部資源</a></li>
+		    <li><a href>更新紀錄</a></li>
+		    <li class="uk-disabled"><a href>其他</a></li>
+		</ul>
+		<ul id="modalAboutSwitcher" class="uk-switcher uk-margin">
+			<li>
+				<p>　此系統是在做完「成績查詢系統」接續的專案，主要設計的宗旨是改進學校<a href="http://www.hs.ntnu.edu.tw/classtable/">現行課表查詢系統</a>的缺點，最大的問題出在以圖片為資料來源，耗用不必要的流量、資料不易異動。再者，圖片不如文字靈活，不能因裝置大小而改變顯示尺寸。其次，班級列表過於巨大、資料缺乏組織等等，造成查詢過程不甚方便。</p>
+				<p>　本系統特別針對上述問題開發解決方案，想藉一己之力，提供更方便的課表查詢系統。本系統的特色有：資料重新組織、班級列表分頁、便捷的回報系統，並且打算持續增加新功能。</p>
+				<hr/>
+				<p>　本系統處於早期開發階段，還未決定程式碼授權方式，若有需要請直接聯絡。寫成後，準備把程式碼放到GitHub上(<a href="http://github.com/andy0130tw/hsnu-classtable/">Repo</a>)，但目前還是空空如也。</p>
+			</li>
+			<li>
+				<h2>何許人也</h2>
+				<p>目前為大一新生，曾就讀附中1296班，興趣是寫寫程式來解決生活問題。</p>
+				<h2>聯絡資訊</h2>
+				<ul class="uk-list uk-list-line">
+					<li>附中信箱: andy0130tw (at) hs (dot) ntnu.edu.tw</li>
+					<li>Facebook: <a href="http://fb.me/andy0130tw/">fb.me/andy0130tw</a></li>
+					<li>Twitter: <a href="http://twitter.com/andy0130tw">@andy0130tw</a></li>
+					<li>Google Plus: <a href="http://google.com/+KuangLinPan1296">+KuangLinPan1296</a></li>
+				</ul>
+			</li>
+			<li>
+				<h2>前端框架</h2>
+				<div class="uk-text-center">
+					<a class="uk-thumbnail uk-thumbnail-small" href="http://angularjs.com/" target="_blank">
+						<img class="uk-width-1-2" src="https://pbs.twimg.com/profile_images/2149314222/square.png">
+						<div class="uk-thumbnail-caption">AngularJS</div>
+					</a>
+					<a class="uk-thumbnail uk-thumbnail-small" href="http://getuikit.com/" target="_blank">
+						<img class="uk-width-1-2" src="http://pagekit.com/storage/home/technology-uikit.svg">
+						<div class="uk-thumbnail-caption">UIkit</div>
+					</a>
+					<p>使用UIkit而非熱門的Bootstrap，是開發的挑戰之一，也是嘗試不同開發工具的好機會。</p>
+				</div>
+				<h2>資料統整</h2>
+				<p>作者研究過資料擷取的方式後，自己另寫了一段產生、維護資料檔的程式碼。</p>
+			</li>
+			<li>
+				<h2>v0.1.1 (Alpha 2), 2015/2/24</h2>
+				<ol class="uk-list uk-list-striped uk-margin-left">
+					<li>bug: 修正了網頁的Metadata。</li>
+					<li>bug: 手機版班級分類選單初始狀態不應有標示。</li>
+					<li>style: 表格字型大小微調。</li>
+					<li>backend: 修改快取機制，課表資料將快取3天。</li>
+				</ol>
+				<h2>v0.1.0 (Alpha 1), 2015/2/23</h2>
+				<ol class="uk-list uk-list-striped uk-margin-left">
+					<li>愉悅的初版。靜靜地等待開學與訪客。</li>
+				</ol>
+			</li>
+		</ul>
+	</div>
+</div>

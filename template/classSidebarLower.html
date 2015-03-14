@@ -1,0 +1,20 @@
+<div data-ng-if="classTableData" class="uk-grid uk-grid-width-medium-1-2 uk-grid-small uk-hidden-small sch-text-secondary">
+	<div data-ng-repeat="_ in [0,1]">
+		<table class="uk-table">
+			<thead></thead>
+			<tbody>
+				<tr data-ng-repeat="d in classTableAggregation[$index]">
+					<th>{{ d.course }}</th>
+					<td class="uk-text-nowrap">{{ d.teacher[0] }}<span data-ng-if="d.teacher.length > 1">等</span></td>
+					<td>{{ d.count }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="uk-panel uk-panel-box" data-ng-if="classTableData">
+	<span data-ng-if="modified">系統資料最後更新：{{ modified | dateR }}<br/></span>
+	此課表最後更新：{{ classTableData.modified | dateR }}<br/>
+	此處資料僅供參考，實際情形以<a href="http://grades.hs.ntnu.edu.tw/classtable/" target="_blank">學校公布</a>為準。
+</div>

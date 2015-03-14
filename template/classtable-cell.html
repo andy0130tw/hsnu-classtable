@@ -1,0 +1,12 @@
+<div class="ccSubject"
+ data-ng-class="{'ccSmall-1': v.course.length >=3, 'ccSmall-2': v.course.length >=5, 'ccSmall-3': v.course.length >=7 }">
+  {{ v.course }}
+</div>
+<div class="ccTeacher" data-ng-init="vTL = v.teacher.length" data-ng-if="v.teacher.length">
+  <span>{{ v.teacher[0] }}</span><!--
+  --><span data-ng-if="vTL == 2"> {{ v.teacher[1] }}</span><!--
+  --><span data-ng-if="vTL > 2" class="ccWithTooltipHint" data-uk-tooltip="{pos: 'bottom', cls: 'ccTooltip'}" data-ng-attr-title="{{ v.teacher.join('<br/>') }}">等 {{ v.teacher.length }} 位</span>
+</div>
+<!--<div class="ccTeacher long" ng-if="v.teacher.length >= 2">
+	{{ v.teacher[0] }} {{ v.teacher[1] }}
+</div>-->

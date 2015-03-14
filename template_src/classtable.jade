@@ -1,0 +1,29 @@
+doctype html
+-var cnt=0;
+-function range(n){return new Array(n)}
+table.uk-table
+  thead
+    tr
+      th.uk-width-1-10&attributes({colspan:3})
+      -//for(var x = 0; x < 5; x++)
+      th.uk-width-1-10&attributes({
+        "data-ng-repeat": "_ in week track by $index"
+      })
+        {{ $index | tR:"weekDay" }}
+  tfoot
+  tbody  
+    -function genTable(term, rowspan){
+      -for(var x = 0; x < rowspan; x++)
+        tr(
+          data-row-id = cnt,
+          data-sch-table-row,
+          data-insert-ampm = x==0 ? "'"+term+"'" : null,
+          data-rowspan = x==0 ? rowspan : null
+        )
+        -cnt++
+    -}
+
+    -genTable("am",4)
+    tr
+      td(colspan=8)
+    -genTable("pm",5)

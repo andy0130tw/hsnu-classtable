@@ -1,0 +1,32 @@
+doctype
+-function range(n){return new Array(n)}
+table.uk-table
+thead
+  tr
+    th.uk-width-1-10&attributes({colspan:3})
+    th.uk-width-1-10&attributes({"data-ng-repeat":"col in table"})
+      {{ $index | lang }}
+tfoot
+tbody
+  -it1=amNum
+  -it2=amSch
+  
+  -function genTable(term){
+      //-each x,i in it1
+      tr(data-ng-repeat="row in table.data.#{term}")
+        th.ampm&attributes({
+          rowspan: "{{ row.length }}",
+          "data-ng-if": "{{ $index == 0 }}"
+        }) {{ "#{term}" | lang }}
+        td.class&attributes({
+          "data-ng-repeat": "cell in row"
+        }) {{ cell[$index] }}
+        //-for _,p in range(5)
+          td(class="cell_"+(p+1)+"_"+(cnt+1))
+        -//cnt++
+  -}
+
+  -genTable("am")
+  tr
+    td(colspan=8)
+  -genTable("pm")

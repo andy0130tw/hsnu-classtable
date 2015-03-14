@@ -1,0 +1,7 @@
+<tr>
+    <th class="cAmpm uk-hidden-small" data-ng-attr-rowspan="{{ c }}" data-ng-if="ampm">{{ ampm | tR:"ampm" }}</th>
+    <td class="cCnt uk-hidden-small">{{ i | tR:"cCnt" }}</td>
+    <td class="cCnt cShort uk-visible-small">{{ i | tR:"cCnt":"short" }}</td>
+    <td class="cTime uk-hidden-small">{{ i | tR:"cTime" }}</td>
+    <td data-sch-table-cell class="cCell" data-ng-repeat="weekDay in [0,1,2,3,4]" data-row-data="t[weekDay][i]"></td>
+</tr>
