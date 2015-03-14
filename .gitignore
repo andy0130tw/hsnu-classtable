@@ -32,3 +32,12 @@ node_modules
 
 # Bower
 bower_components
+
+# API (Backend)
+api/
+db/
+
+# Release
+dist/
+test_data/*.json
+test_data_history/
