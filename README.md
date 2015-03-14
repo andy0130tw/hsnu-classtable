@@ -19,8 +19,8 @@ This You may grab the table data by injecting the JS file [`misc/inject2.js`](mi
   1. Write a simple backend to receive some JSON and write them into separated files.
   2. Modify the constants `DATA_*` at the beginning of the script. Select all, and then copy.
   3. Open your browser and navigate to [the official classtable](http://grades.hs.ntnu.edu.tw/classtable/).
-  4. Open up the console (e.g. Press `Ctrl+Shift+K` in Firefox, or `F12` in Chrome). Paste the script and press enter to initialize it.
+  4. Open up the console (e.g. Press `Ctrl+Shift+K` in Firefox, or `F12` in Chrome). Paste the script and press `Enter` to initialize it.
   5. If anything goes well, some help will be displayed in the console. Execute `main(...)` to collect all the data(This process may take several minutes). Then execute `dumpData(...)` to send them to the backend you wrote.
-  6. Organize the files, create `test_data/` and place all files in with correct filename.
+  6. Organize the files, create `test_data/` and place all files in with correct filename. Also have a copy in `dist/`.
 
 Please note that the paths should all be correct in order to produce data.
