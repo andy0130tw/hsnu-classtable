@@ -3,7 +3,6 @@ sch.factory('$schLoader', ['$http', '$q', function($http, $q) {
 
     //data cache
     var cache = {};
-    window.cache = cache;
 
     function loadResource(filename) {
         return $http({
