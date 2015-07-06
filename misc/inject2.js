@@ -310,7 +310,7 @@
         console.log(' - c: output course\'s ID file.');
         console.log(' - d: include the detailed data in the output (produce standalone files).');
         console.log(' - i: output table index file.');
-        console.log(' - m: additionally product a output, merging all the tables.');
+        console.log(' - m: additionally produce an output file, merging all the tables.');
         console.log(' - v: generate version file based on this process.');
         console.log(' If no options are given, the default option is "tciv".');
         console.log('%c* After successful collecting data, execute "send(useLocalStorage)" to export data:', 'font-size: 120%;');
